@@ -18,3 +18,12 @@ if (horario >= inicio_votacao && horario <= termino_votacao) {
 } else {
     console.log('Votação encerrada')
 }
+
+
+/* // bloco para buscar DATA & HORA EXATAS
+function hora() {
+    const now = new Date();
+    const hora = now.getHours();
+    const minutos = now.getMinutes();
+    const horario = [hora, minutos].join(':');
+} */

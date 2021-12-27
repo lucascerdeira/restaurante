@@ -1,16 +1,7 @@
 const express = require('express');
 const server = express();
-const cadastro = require('../routes/cadastroRestaurante');
-//const votos = require('../routes/votos');
 
-
-// informando ao express que vamos usar dados json
-server.use(express.json());
-
-server.use('/', cadastro);
-
-//server.use('/', votos);
-
+server.express(json())
 
 const votos = []
 
@@ -26,12 +17,11 @@ const minutos = data.getMinutes();
 const horario = [horas + minutos].json
 
 server.post('/votos', (request, response) => {
-    const { id , name } = request.body;
+    const { restaurante , name } = request.body;
 
 
     votos.push({
-
-        id,
+        restaurante,
         name,
         "Data_da_votacao": mes + '/' + dia + '/' + anoAtual,
         "Hora_da_votacao": new Date().getHours() + ':' + new Date().getMinutes()
@@ -43,6 +33,6 @@ server.post('/votos', (request, response) => {
 
 server.get('/votos', (request, response) => {
     return response.json(votos)
-});
+})
 
-server.listen(3031);
+//module.exports = router;
