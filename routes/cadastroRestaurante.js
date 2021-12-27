@@ -16,33 +16,30 @@ const anoAtual = data.getFullYear();
 const restaurantes = [];
 
 // bloco para criar os cadastros
-router.post('/cadastro', (request, response) => {
-    const { name, endereco } = request.body;
+router.post('/', (request, response) => {
+    const { nome, endereco } = request.body;
 
     const restauranteExistente = restaurantes.some(
-        (restaurante) => restaurante.name === name)
+        (restaurante) => restaurante.nome === nome)
  
     if (restauranteExistente) {
         return response.status(400).json({error: 'Restaurante já Cadastrado!'})
     }
 
     restaurantes.push({ 
-        name,
+        nome,
         endereco,
         id:uuidv4(),
         "creat_date": mes + '/' + dia + '/' + anoAtual,
         // pegando a hora exata
         "create_hours": new Date().getHours() + ':' + new Date().getMinutes()
-
-        //+ '/' + new Date().getFullYear, aparece que é um [ntive code]
-        // tem essa opção também "create_ano": new Date()
     });
     
     return response.status(201).send()
 });
 
 // bloco para retornar todos os restaurantes 
-router.get('/lista', (request, response) => {
+router.get('/', (request, response) => {
 
     return response.json(restaurantes)
     
