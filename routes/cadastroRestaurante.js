@@ -1,15 +1,13 @@
 const express = require('express');
-
 const router = express.Router();
 
 const { v4: uuidv4 } = require('uuid');
 
-// gerando datas extas  
+//gerando datas exatas  
 const data = new Date();
 const mes = data.getMonth();
 const dia = data.getDate();
 const anoAtual = data.getFullYear();
-
 
 
 // array de armmazenamento dos cadastros
@@ -23,40 +21,49 @@ router.post('/', (request, response) => {
         (restaurante) => restaurante.nome === nome)
  
     if (restauranteExistente) {
-        return response.status(400).json({error: 'Restaurante já Cadastrado!'})
+        return response.status(400).json({error: 'Restaurante já Cadastrado!'});
     }
 
     restaurantes.push({ 
         nome,
         endereco,
         id:uuidv4(),
-        "creat_date": mes + '/' + dia + '/' + anoAtual,
-        // pegando a hora exata
-        "create_hours": new Date().getHours() + ':' + new Date().getMinutes()
     });
     
-    return response.status(201).send()
+    return response.status(201).send();
 });
 
 // bloco para retornar todos os restaurantes 
 router.get('/', (request, response) => {
 
-    return response.json(restaurantes)
+    return response.json(restaurantes);
     
 });
 
-router.put('/lista', (request, response) => {
+router.put('/', (request, response) => {
     
-    const { name } = request.headers;
-    
-    restaurantes.push(name)
+    const { nome }  = request.body;
+    const { restaurantes } = request;
 
-    return response.json(restaurantes)
+    restaurantes.nome = nome;
+    return response.status(201).send();
+
+    /*const { index } = request.params;
+     const { nome } = request.body;
+    restaurantes[index] = nome; */
 });
 
 
-router.delete('/lista', (request, response) => {
+router.delete('/', (request, response) => {
+    
+    const { restaurantes } = request;
 
+    restaurantes.splice(restaurantes, 1);
+    
+    return response.status(200).json(restaurantes);
 });
+
+
+
 
 module.exports = router;

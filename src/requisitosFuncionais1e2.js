@@ -1,8 +1,4 @@
-// Pegando a hora exata 
-const now = new Date();
-var hora = now.getHours() // passando para variavel 
-var minutos = now.getUTCMinutes()
-const horario = [hora, minutos].join(':')
+
 
 // forçando a hora 
 const inicio_votacao = new Date('9:00:00');
@@ -20,10 +16,27 @@ if (horario >= inicio_votacao && horario <= termino_votacao) {
 }
 
 
-/* // bloco para buscar DATA & HORA EXATAS
-function hora() {
-    const now = new Date();
-    const hora = now.getHours();
-    const minutos = now.getMinutes();
-    const horario = [hora, minutos].join(':');
-} */
+
+
+
+
+
+function data() {
+    
+    const dia = datasHora.getDate();
+    const mes = datasHora.getUTCMonth();
+    const anoAtual = datasHora.getFullYear();
+
+    const data_br = [dia, mes + 1 , anoAtual].join('/')
+
+    return  data_br;
+} 
+
+function horario() {
+   
+    const horas = datasHora.getHours();
+    const minutos = datasHora.getMinutes();
+    const horaBr = [horas , minutos].join(':');
+
+    return horaBr;
+}
