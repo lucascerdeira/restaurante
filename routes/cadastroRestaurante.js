@@ -5,7 +5,7 @@ const router = express.Router();
 // v4 vai gerar um id totaltamente random 
 const { v4: uuidv4 } = require('uuid');
 
-const x = 1
+
 // bloco para criar os cadastros
 // array de armmazenamento dos cadastros
 const restaurantes = [];
@@ -27,7 +27,6 @@ router.post('/', (request, response) => {
         id:uuidv4(),
         
     });
-    console.log(restaurantes[2])
     return response.status(201).send();
 });
 
@@ -47,15 +46,15 @@ const votos = [];
 router.post('/votos', (request, response) => {
     const { restaurante , participante } = request.body;
 
-    const restauranteExistente = restaurantes.some(
-        (restaurant) => restaurant.nome === restaurante)
-
     const votoExistente = votos.some(
         (voto) => voto.participante === participante)
     
-        if(votoExistente) {
-            return response.status(400).json({error: 'Só se pode votar uma vez'})
-            }
+    if(votoExistente) {
+        return response.status(400).json({error: 'Só se pode votar uma vez'})
+        };
+
+    const restauranteExistente = restaurantes.some(
+        (restaurant) => restaurant.nome === restaurante)
     if (!restauranteExistente) {
         return response.status(400).json({error: 'Restaurante não cadastrado!'});
     } else {
