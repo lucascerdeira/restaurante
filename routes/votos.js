@@ -1,20 +1,18 @@
 const express = require('express');
-const functionDate = require('./functionDate.js');
-const functionHours = require('./functionHours.js');
 const router = express.Router();
+ 
+const functionDate = require('../functions/functionDate.js');
+const functionHours = require('../functions/functionHours.js');
+const functionRequisitos = require('../functions/requisitos.js')
 
-const votos = [];
 
-// gerando datas extas  
-const data = new Date();
-const mes = data.getMonth();
-const dia = data.getDate();
-const anoAtual = data.getFullYear();
 
+// array de armazenamento 
+const votos = []; 
 router.post('/', (request, response) => {
     const { restaurante , nome } = request.body;
 
-    
+   
     votos.push({
         restaurante,
         nome,

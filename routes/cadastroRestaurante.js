@@ -2,14 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const { v4: uuidv4 } = require('uuid');
-
-//gerando datas exatas  
-const data = new Date();
-const mes = data.getMonth();
-const dia = data.getDate();
-const anoAtual = data.getFullYear();
-
-
 // array de armmazenamento dos cadastros
 const restaurantes = [];
 

@@ -1,5 +1,3 @@
-// 
-
 module.exports = function horario() {
     const datasHora = new Date();
     const horas = datasHora.getHours();
